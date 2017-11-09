@@ -24,16 +24,15 @@ int main() {
 	int i, true_pos = 0, true_neg = 0, false_pos = 0, false_neg = 0;
 	double acc = 0;
 	
-	GRNN nurl_ntwk = GRNN(trng_set, SIGMA);
+	GRNN trng_ntwk = GRNN(trng_set, SIGMA);
 	
 	printf(" Done.\n");
-	//for(i = 0; i < 595; i++)
-	//	printf("%i: %f\n", i, nurl_ntwk.pred_set[i].clsfr);
 	
 	for(i = 0; i < act_pop; i++) {
-		if(nurl_ntwk.pred_set[i].clsfr < 0 && trng_set[i].clsfr < 0) true_neg++;
-		else if(nurl_ntwk.pred_set[i].clsfr > 0 && trng_set[i].clsfr > 0) true_pos++;
-		else if(nurl_ntwk.pred_set[i].clsfr < 0 && trng_set[i].clsfr > 0) false_neg++;
+		printf("%f, %f\n", trng_ntwk.pred_set[i].clsfr, trng_set[i].clsfr);
+		if(trng_ntwk.pred_set[i].clsfr < 0 && trng_set[i].clsfr < 0) true_neg++;
+		else if(trng_ntwk.pred_set[i].clsfr > 0 && trng_set[i].clsfr > 0) true_pos++;
+		else if(trng_ntwk.pred_set[i].clsfr < 0 && trng_set[i].clsfr > 0) false_neg++;
 		else false_pos++;
 	}
 	
@@ -52,33 +51,35 @@ int main() {
 	printf(" Done.\n");
 	
 	double mgtd;
+	Data_Point test_set[POPULATION];
 	
 	printf("Crawling...\n");
-	int j = 0, x;
+	int j = 0, test_pop = 0;
 	Data_Point data;
 	for(i = 0; i < (POPULATION - act_pop); i++) {
 		if(web_crwl.web_stack.empty()) break;
 		
-		x += web_crwl.crawl(j++);
+		test_pop += web_crwl.crawl(j);
+		np.init_test_set(test_set, j++, test_pop);
 	}
 	
-	printf("Done. Crawled %i pages, %i normalized unigrams stored\n", (j - 1), x);
+	printf("Done. Crawled %i pages, %i Test elements stored\n", j, test_pop);
 	
 	printf("--------------------------------------------------------------------------------\n\n");
 	
-	printf("Build test set:");
-	Data_Point test_set[POPULATION];
-	int test_cnt = np.init_test_set(test_set);
-	printf("Done\n");
-	for(i = 0; i < 20; i++) {
-        cout << "i = " << i << endl;
-        for(j = 0; j < FEAT_CNT; j++) {
-            //cout << "j = " << j << endl;
-			printf("%f, ", test_set[i].feat_vecs[j]);
-        }
-		printf("\n\n");
-	}
-	//printf("Classify test set:\n");
+	printf("Classify test set:\n");
+	GRNN test_ntwk = GRNN();
+	for(i = 0; i < test_pop; i++) 
+		test_set[i].clsfr = trng_ntwk.classify(trng_set, test_set[i]);
+	for(i = 0; i < test_pop; i++)
+		printf("%i: %f...%f, %f, %f, %f, %f\n", test_set[i].pnt_id, test_set[i].clsfr, test_set[i].feat_vecs[0], test_set[i].feat_vecs[1], test_set[i].feat_vecs[2], test_set[i].feat_vecs[3], test_set[i].feat_vecs[4]);
+	
+	printf(" Done.\n");
+	
+	
+	
+	
+	
 	//printf("Totals - \n\t[1.0,0.5): ,[0.5, 0.0): ,[0.0, -0.5), [-0.5, 1.0]\n");
 	//printf("Balancing training set...\n\n");
 	

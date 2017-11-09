@@ -23,3 +23,4 @@ clean:
 	rm -f ./bin/*.*
 	rm -f ./bin/html_source/*.*
 	rm -f ./bin/unigrams/*.*
+	rm -f ./bin/test_set/*.*
