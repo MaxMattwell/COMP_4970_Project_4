@@ -71,9 +71,10 @@ int main() {
 	GRNN test_ntwk = GRNN();
 	for(i = 0; i < test_pop; i++) 
 		test_set[i].clsfr = trng_ntwk.classify(trng_set, test_set[i]);
-	for(i = 0; i < test_pop; i++)
-		printf("%i: %f...%f, %f, %f, %f, %f\n", test_set[i].pnt_id, test_set[i].clsfr, test_set[i].feat_vecs[0], test_set[i].feat_vecs[1], test_set[i].feat_vecs[2], test_set[i].feat_vecs[3], test_set[i].feat_vecs[4]);
-	
+	for(i = 0; i < test_pop; i++){
+		if(test_set[i].pnt_id >= 0)
+			printf("%i: %f...%f, %f, %f, %f, %f\n", test_set[i].pnt_id, test_set[i].clsfr, test_set[i].feat_vecs[0], test_set[i].feat_vecs[1], test_set[i].feat_vecs[2], test_set[i].feat_vecs[3], test_set[i].feat_vecs[4]);
+	}
 	printf(" Done.\n");
 	
 	
