@@ -26,6 +26,7 @@ class GRNN {
 	Data_Point pred_set[POPULATION];
 	double sigma;
 	
+	GRNN();
 	GRNN(Data_Point trng_set[POPULATION], double sig);
 	double classify(Data_Point trng_set[POPULATION], Data_Point point);
 };

@@ -22,9 +22,10 @@ class Data_Point {
     
 	Data_Point();
 	Data_Point(string line);
+	Data_Point(string line, int i);
 	float distance(Data_Point b);
 	int init_trng_set(Data_Point trng_set[]);
-	int init_test_set(Data_Point test_set[]);
+	Data_Point init_test_set(Data_Point test_set[], int j, int y);
 };
 
 #endif

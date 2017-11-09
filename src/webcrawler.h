@@ -22,7 +22,6 @@ class WebCrawler {
 	private:
 	int find_children(web_node parent, int j);
 	void char_extractor(string filepath, int j);
-	void add_test (string uni_file);
 	
 	public:
 	stack<web_node> web_stack;

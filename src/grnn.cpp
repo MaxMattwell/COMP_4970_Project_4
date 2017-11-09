@@ -12,6 +12,9 @@ inputs: training set, sigma value
 outputs: N/A
 updates: -MAC 11/5/17: refactoring
 */
+GRNN::GRNN() {
+	sigma = 0;
+}
 GRNN::GRNN(Data_Point trng_set[POPULATION], double sig) {
 	sigma = sig;
 	

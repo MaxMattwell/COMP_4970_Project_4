@@ -147,7 +147,7 @@ void WebCrawler:: char_extractor(string filepath, int j) {
 		new_filepath += "_unigrams.txt";
 		ofstream out_text(new_filepath.c_str());
 		if(!out_text.is_open()) perror("Normalization write error");
-		cout << "Storing normalized unigram to /bin/unigrams/" << new_filepath  << endl;
+		cout << "Storing normalized unigram to " << new_filepath  << endl;
 		
 		// First write the index of the output file
 		out_text << count;
@@ -159,7 +159,7 @@ void WebCrawler:: char_extractor(string filepath, int j) {
 		}
 		out_text.close();
 		
-		add_test(new_filepath);
+		// add_test(new_filepath);
 	}
 	
 	else {
@@ -172,34 +172,44 @@ void WebCrawler:: char_extractor(string filepath, int j) {
 
 /*
 */
-void WebCrawler::add_test(string uni_file) {
-	Data_Point test_pnt;
-	printf("Adding to test dataset...");
-	ifstream input(uni_file.c_str());
-	if(!input.is_open()) perror("Unigram read error");
-	ofstream output;
-	output.open("bin/test_set.txt", ios_base::app | ios_base::out);
-	if(!output.is_open()) perror("Test set write error");
-	string line;
-	int i;
-	double mag = 0;
+// void WebCrawler::add_test(string uni_file, int j) {
+	// Data_Point test_pnt;
+	// printf("Adding to test dataset...");
 	
-	getline(input, line);
-	test_pnt = Data_Point(line);
-	printf("\n");
-	for(i = 0; i < FEAT_CNT; i++) {
-		output << test_pnt.feat_vecs[i] << " ";
-		printf("%f, ", test_pnt.feat_vecs[i]);
-	}
-	printf("\n");
+	// ifstream input(uni_file.c_str());
+	// if(!input.is_open()) perror("Unigram read error");
 	
-	output.close();
-	input.close();
+	// string count;
+	// stringstream ab;
+	// ab << j;
+	// ab >> count;
 	
-	printf(" Done.");
+	// string path = "/bin/test_set/";
+	// path += count;
+	// path += ".txt";
+	// ofstream out_text(new_filepath.c_str());
+	// if(!out_text.is_open()) perror("Normalization write error");
+		
+	// string line;
+	// int i;
 	
-	return;
-}
+	
+	// getline(input, line);
+	// test_pnt = Data_Point(line);
+	// printf("\n");
+	// for(i = 0; i < FEAT_CNT; i++) {
+		// output << test_pnt.feat_vecs[i] << " ";
+		// printf("%f, ", test_pnt.feat_vecs[i]);
+	// }
+	// printf("\n");
+	
+	// output.close();
+	// input.close();
+	
+	// printf(" Done.");
+	
+	// return;
+// }
 
 /*
 */
