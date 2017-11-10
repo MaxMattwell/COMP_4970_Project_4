@@ -5,5 +5,7 @@ First, create a directory called bin on the same level as the src directory. Wit
 To compile, link, and run the program, execute the following on the command line:
 
 make clean
+
 make
+
 ./myMDA5
